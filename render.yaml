@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: syncverse-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    plan: free
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: TICK_RATE_MS
+        value: 50
+      - key: JWT_SECRET
+        generateValue: true
+      # Your deployed Vercel URL(s), comma-separated, e.g. https://syncverse.vercel.app
+      - key: CORS_ORIGIN
+        sync: false
+      # Optional
+      - key: MONGO_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
